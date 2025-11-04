@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gold Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Gold Price Prediction</h1>
+
+    <form method="POST">
+        <label for="year">Enter Year:</label>
+        <input type="number" name="year" placeholder="e.g. 2020" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if predicted_price %}
+        <h3>Predicted Next Day Price:</h3>
+        <p style="color: gold; font-size: 1.5em;">₹ {{ predicted_price | round(2) }}</p>
+        {% if graph_url %}
+            <img src="data:image/png;base64,{{ graph_url }}" alt="Prediction Graph">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
